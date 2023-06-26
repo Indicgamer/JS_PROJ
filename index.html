@@ -1,114 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="ttt_css/style.css" />
 
-    <style>
-        .map{
-            display: flex;
-            flex-wrap: wrap;
-            width: 50%;
-            margin: auto;
-            /* margin-top: 100px; */
-            /* justify-content: space-between; */
-        }
-        .v1{
-            height: 100px;
-            width: 30%;
-            flex-grow: 1;
-            text-align: center;
-        }
-        .v2,.v3{
-            border-left: 5px solid black;
-            height: 100px;
-            width: 30%;
-            flex-grow: 1;
-            text-align: center;
-        }
-        .h1{
-            border-left: 5px solid black;
-            height: 100px;
-            width: 30%;
-            flex-grow: 1;
-        }
-        .b1{
-            border-top: 7px solid black;
-            text-align: center;
-        }
-        .heading{
-            flex-basis: 100%;
-            text-align: center;
-        }
-        .controls{
-            flex-basis: 100%;
-            text-align: center;
-        }
-        p{
-            font-size: 30px;
-            margin: 0;
-        }
-        .imo{
-            flex-basis: 100%;
-            text-align: center;
-            margin: 50px;
-        }
-        .X{
-            margin-right: 200px;
-            padding: 20px 50px;
-        }
-        .O{
-            padding: 20px 50px;
-        }
-        .res{
-            align-self: center;
-            justify-self: center;
-            font-size: 80px;
-            color: green;
-            margin: 30px auto;
-        }
-
-    
-    </style>
-
-</head>
-<body>
-
-
-    <div class="map">
-        <div class="controls">
-            <p>Choose X or O</p>
-        </div>
-        <div class="imo">
-            <button class="X" id="x">
-                <img src="ttt_img/close.png" alt="">
-            </button>
-            <button class="O" id="o">
-                <img src="ttt_img/o.png" alt="">
-            </button>
-            
-        </div>
-       
-        <div class="heading">
-            <h1>TIC TAC TOE</h1>
-        </div>
-        
-        <div class="v1" id="bx1"></div>
-        <div class="v2" id="bx2"></div>
-        <div class="v3" id="bx3"></div>
-        <div class="v1 b1" id="bx4"></div>
-        <div class="h1 b1" id="bx5"></div>
-        <div class="h1 b1" id="bx6"></div>
-        <div class="v1 b1" id="bx7"></div>
-        <div class="v2 b1" id="bx8"></div>
-        <div class="v3 b1" id="bx9"></div>
-        <p id="idle" class="res"></p>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Belanosima&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>TIC-TAC-TOE</h1>
     </div>
-    
-    
-    
-    <script src="tic.js"></script>
-</body>
+    <div class="block">
+      <div class="b1">
+        <button class="btn btn1" onclick="window.location.href = './main2.html';">1v1</button>
+      </div>
+      <div class="b2">
+        <button class="btn btn2" onclick="window.location.href = './main.html';">Vs Computer</button>
+      </div>
+    </div>
+  </body>
 </html>

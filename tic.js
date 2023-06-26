@@ -1,128 +1,183 @@
-let x = document.getElementById('x');
-let o = document.getElementById('o');
-let player = '1';
-
-let attr = Array.from(x.attributes);
-console.log(attr)
+function game(tag){
+    const player1 = tag;
+    let player2 = 'x';
+    let player_turn = 'x';
 
 
+    if(player1==='x'){
+        player2 = "o"
+        document.querySelector(".dd").innerHTML = "Player 1 to play";
+    }
+    else{
+        player2 = 'x';
+        document.querySelector(".dd").innerHTML = "Player 2 to play";
+    }
+    document.querySelector(".choose").style.display = 'none';
+    document.querySelector(".container").style.display = 'block';
+
+    const boxes = document.querySelectorAll(".b");
 
 
-o.onclick = function(){
-    player ='o';
-}
-x.onclick = function(){
-    player ='x';
-}
+    const controller = new AbortController();
 
-let box = [];
 
-for (let index = 0; index < 9; index++) {
-    box[index] = document.getElementById('bx'+(index+1));   
-}
-
-console.log(box)
-for (let index = 0; index < box.length; index++) {
-    box[index].addEventListener('click',function(){
-        main(index);
-    });
-    
-}
-
-function main(index){
-    console.log(player);
-    if(!(box[index].firstChild)){
-        if(player == 'x'){
-            let x_image = document.createElement('img');
-            x_image.setAttribute('src','ttt_img/close.png');
-            x_image.setAttribute('class','x');
-            box[index].appendChild(x_image);
-            box[index].setAttribute('x',true);
-            setTimeout(winner,20);
-            
+    for (let index=0 ;index<boxes.length;index++){
+        boxes[index].addEventListener('click',()=>{
+        if(!boxes[index].hasAttribute("g")){
+            if(player_turn === "x"){
+                let img = document.createElement("img");
+                img.setAttribute("src","./ttt_img/x.png");
+                img.setAttribute("class","t");
+                boxes[index].appendChild(img);
+                boxes[index].setAttribute("g","x");
+                player_turn = "o";
+                if(player1 == player_turn){
+                    document.querySelector(".dd").innerHTML = "Player 1 to play";
+                }
+                else{
+                    document.querySelector(".dd").innerHTML = "Player 2 to play";
+                }
+                setTimeout(game_win,20);
+            }
+            else{
+                let img = document.createElement("img");
+                img.setAttribute("src","./ttt_img/o.png");
+                img.setAttribute("class","t");
+                boxes[index].appendChild(img);
+                boxes[index].setAttribute("g","o");
+                player_turn = "x";
+                if(player1 == player_turn){
+                    document.querySelector(".dd").innerHTML = "Player 1 to play";
+                }
+                else{
+                    document.querySelector(".dd").innerHTML = "Player 2 to play";
+                }
+                setTimeout(game_win,20);
+                
+            }
         }
-        if(player == 'o'){
-            let o_image = document.createElement('img');
-            o_image.setAttribute('src','ttt_img/o.png');
-            o_image.setAttribute('class','o');
-            box[index].appendChild(o_image);
-            box[index].setAttribute('x',true);
-            setTimeout(winner,20);
-           
             
-            
+        },
+        { signal: controller.signal } // pass an AbortSignal to this handler
+        );
+    }
+
+    function game_win(){
+        
+
+        //horizantal win condition
+        for (let index = 0; index <boxes.length; index+=3) {
+            if(boxes[index].getAttribute("g")=="x" && boxes[index+1].getAttribute("g")=="x" && boxes[index+2].getAttribute("g")=="x"){
+                if(player1 === "x"){
+                    alert("Player 1 WON!!");
+                }
+                else{
+                    alert("Player 2 Won!!");
+                }
+                window.location.href = "./index.html";
+                return;
+            }
+            if(boxes[index].getAttribute("g")=="o" && boxes[index+1].getAttribute("g")=="o" && boxes[index+2].getAttribute("g")=="o"){
+                if(player1 === "o"){
+                    alert("Player 1 WON!!");
+                }
+                else{
+                    alert("Player 2 Won!!");
+                }
+                window.location.href = "./index.html";
+                return;
+            }
         }
-        if(player =='x'){
-            player ='o';
+
+        //vertical win condition
+        for (let index = 0; index <3; index++) {
+            if(boxes[index].getAttribute("g")=="x" && boxes[index+3].getAttribute("g")=="x" && boxes[index+6].getAttribute("g")=="x"){
+                if(player1 === "x"){
+                    alert("Player 1 WON!!");
+                }
+                else{
+                    alert("Player 2 Won!!");
+                }
+                window.location.href = "./index.html";
+                return;
+            }
+            if(boxes[index].getAttribute("g")=="o" && boxes[index+3].getAttribute("g")=="o" && boxes[index+6].getAttribute("g")=="o"){
+                if(player1 === "o"){
+                    alert("Player 1 WON!!");
+                }
+                else{
+                    alert("Player 2 Won!!");
+                }
+                window.location.href = "./index.html";
+                return;
+            }
+        }
+
+
+        //1st diagonal win condition
+        if(boxes[0].getAttribute("g")=="x" && boxes[4].getAttribute("g")=="x" && boxes[8].getAttribute("g")=="x"){
+            if(player1 === "x"){
+                alert("Player 1 WON!!");
+            }
+            else{
+                alert("Player 2 Won!!");
+            }
+            window.location.href = "./index.html";
             return;
         }
-        if(player =='o'){
-            player ='x';
+        if(boxes[0].getAttribute("g")=="o" && boxes[4].getAttribute("g")=="o" && boxes[8].getAttribute("g")=="o"){
+            if(player1 === "o"){
+                alert("Player 1 WON!!");
+            }
+            else{
+                alert("Player 2 Won!!");
+            }
+            window.location.href = "./index.html";
             return;
         }
+
+        //2nd diagonal win condition
+        if(boxes[2].getAttribute("g")=="x" && boxes[4].getAttribute("g")=="x" && boxes[6].getAttribute("g")=="x"){
+            if(player1 === "x"){
+                alert("Player 1 WON!!");
+            }
+            else{
+                alert("Player 2 Won!!");
+            }
+            window.location.href = "./index.html";
+            return;
+        }
+        if(boxes[2].getAttribute("g")=="o" && boxes[4].getAttribute("g")=="o" && boxes[6].getAttribute("g")=="o"){
+            if(player1 === "o"){
+                alert("Player 1 WON!!");
+            }
+            else{
+                alert("Player 2 Won!!");
+            }
+            window.location.href = "./index.html";
+            return;
+        }
+
+        //game_over condition
+        let game_over = true;
+        for (let index = 0; index < boxes.length; index++) {
+            if(!boxes[index].hasAttribute("g")){
+                game_over=false;
+                break;
+            }
+        }
+        if(game_over){
+            controller.abort();
+            alert("Game  Over!Draw");
+            window.location.href = "./index.html";
+            return;
+        }
+
+
         
     }
-}
 
-function gamer(index){
-    console.log(player);
+
     
+
 }
-
-
-
-function winner(){
-    for (let index = 0; index < box.length; index+=3) {
-        if(box[index].firstChild && box[index+1].firstChild && box[index+2].firstChild){
-            if(box[index].childNodes[0].attributes[1]['value'] == 'x' && box[index+1].childNodes[0].attributes[1]['value'] == 'x' && box[index+2].childNodes[0].attributes[1]['value'] == 'x'){
-                alert("X WON!!");
-                location.reload();
-                box[index].removeEventListener('click',function(){
-                    main(index);
-                })
-                return;
-            }
-            if(box[index].childNodes[0].attributes[1]['value'] == 'o' && box[index+1].childNodes[0].attributes[1]['value'] == 'o' && box[index+2].childNodes[0].attributes[1]['value'] == 'o'){
-                alert("O WON!!");
-                location.reload();
-                return;
-            }
-        }  
-    }
-    for (let index = 0; index < 3; index++) {
-        if(box[index].firstChild && box[index+3].firstChild && box[index+6].firstChild){
-            if(box[index].childNodes[0].attributes[1]['value'] == 'x' && box[index+3].childNodes[0].attributes[1]['value'] == 'x' && box[index+6].childNodes[0].attributes[1]['value'] == 'x'){
-                alert("X WON!!");
-
-                return;
-            }
-            if(box[index].childNodes[0].attributes[1]['value'] == 'o' && box[index+3].childNodes[0].attributes[1]['value'] == 'o' && box[index+6].childNodes[0].attributes[1]['value'] == 'o'){
-                alert("O WON!!")
-                return;
-            }
-        }  
-    }
-    if(box[0].firstChild && box[4].firstChild && box[8].firstChild){
-        if(box[0].childNodes[0].attributes[1]['value'] == 'x' && box[4].childNodes[0].attributes[1]['value'] == 'x' && box[8].childNodes[0].attributes[1]['value'] == 'x'){
-            alert("X WON!!");
-            return;
-        }
-        if(box[0].childNodes[0].attributes[1]['value'] == 'o' && box[4].childNodes[0].attributes[1]['value'] == 'o' && box[8].childNodes[0].attributes[1]['value'] == 'o'){
-            alert("O WON!!")
-            return;
-        }
-    }
-    if(box[2].firstChild && box[4].firstChild && box[6].firstChild){
-        if(box[2].childNodes[0].attributes[1]['value'] == 'x' && box[4].childNodes[0].attributes[1]['value'] == 'x' && box[6].childNodes[0].attributes[1]['value'] == 'x'){
-            alert("X WON!!");
-            return;
-        }
-        if(box[2].childNodes[0].attributes[1]['value'] == 'o' && box[4].childNodes[0].attributes[1]['value'] == 'o' && box[index].childNodes[6].attributes[1]['value'] == 'o'){
-            alert("O WON!!");
-            return;
-        }
-    }
-}
-
-
-
